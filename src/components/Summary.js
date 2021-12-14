@@ -22,18 +22,18 @@ function Summary({ transaction }) {
   };
   useEffect(() => {
     last30Days();
-  }, [transaction]);
+  }, []);
   console.log('Sum', sum);
   return (
     <>
       <h1>Summary of Transactions</h1>
-      <table style={{ width: '100%' }}>
-        <th>
-          <td>Date</td>
-          <td>Reference</td>
-          <td>Amount</td>
-          <td>Description</td>
-        </th>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Reference</th>
+          <th>Amount</th>
+          <th>Description</th>
+        </tr>
         {transactionState.map((record) => (
           <Transaction
             key={record.id}

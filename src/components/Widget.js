@@ -20,14 +20,14 @@ function Widget({ invoices, transaction }) {
   return (
     <>
       <h1>Invoices</h1>
-      <table style={{ width: '100%' }}>
-        <th>
-          <td>Date</td>
-          <td>Client</td>
-          <td>Amount</td>
-          <td>Reference</td>
-          <td>Status</td>
-        </th>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Client</th>
+          <th>Amount</th>
+          <th>Reference</th>
+          <th>Status</th>
+        </tr>
         {invoiceState.map((record) => (
           <Invoices
             key={record.id}
