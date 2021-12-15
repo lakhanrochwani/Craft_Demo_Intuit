@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function Invoices({ client, date, amount, status, reference }) {
+function Invoices({ client, date, amount, status, reference, onEdit, id }) {
+
   return (
     <>
       <tr>
@@ -10,6 +11,7 @@ function Invoices({ client, date, amount, status, reference }) {
         <td>{reference}</td>
         <td>{status}</td>
       </tr>
+      <button onClick={() => onEdit(id)}>Edit</button>
     </>
   );
 }
