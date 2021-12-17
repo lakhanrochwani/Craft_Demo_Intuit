@@ -23,7 +23,7 @@ function Widget({ invoices, transaction }) {
 
   const handleChange = (e) => {
     let { name, value } = e.target;
-    console.log(name, value);
+    // console.log(name, value);
     setEditInvoice({ ...editInvoice, [name]: value });
   };
 
@@ -31,12 +31,12 @@ function Widget({ invoices, transaction }) {
     e.preventDefault();
     let updatedRecords = invoiceState.map((invoice, index) => {
       if (invoice.id === editInvoice.id) {
-        console.log('invoice', invoice);
+        // console.log('invoice', invoice);
         invoice = editInvoice;
       }
       return invoice;
     });
-    console.log('Updated:', updatedRecords);
+    // console.log('Updated:', updatedRecords);
     setInvoiceState(updatedRecords);
   };
 
