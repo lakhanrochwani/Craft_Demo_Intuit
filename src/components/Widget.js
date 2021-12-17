@@ -4,11 +4,6 @@ import Invoices from './Invoices';
 function Widget({ invoices, transaction }) {
   const [invoiceState, setInvoiceState] = useState(invoices);
   const [transactionState, setTransactionState] = useState(transaction);
-  // const [currentInvoice, setCurrentInvoice] = useState(0);
-  // const [datestate, setDate] = useState('');
-  // const [amountstate, setAmount] = useState('');
-  // const [clientstate, setClient] = useState('');
-  // const [referencestate, setReference] = useState('');
   const [editInvoice, setEditInvoice] = useState({});
 
   const checkAmount = () => {
