@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function Invoices({ client, date, amount, status, reference, onEdit, id }) {
-
   return (
     <>
       <tr>
@@ -10,8 +9,13 @@ function Invoices({ client, date, amount, status, reference, onEdit, id }) {
         <td>{amount}</td>
         <td>{reference}</td>
         <td>{status}</td>
+        <td>
+          <button style={{ float: 'left' }} onClick={() => onEdit(id)}>
+            Edit
+          </button>
+        </td>
       </tr>
-      <button onClick={() => onEdit(id)}>Edit</button>
+      {/* <button style={{float: "left"}} onClick={() => onEdit(id)}>Edit</button> */}
     </>
   );
 }

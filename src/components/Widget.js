@@ -4,46 +4,44 @@ import Invoices from './Invoices';
 function Widget({ invoices, transaction }) {
   const [invoiceState, setInvoiceState] = useState(invoices);
   const [transactionState, setTransactionState] = useState(transaction);
-  const [currentInvoice, setCurrentInvoice] = useState(0);
-  const [datestate, setDate] = useState();
-  const [amountstate, setAmount] = useState();
-  const [clientstate, setClient] = useState();
-  const [referencestate, setReference] = useState();
+  // const [currentInvoice, setCurrentInvoice] = useState(0);
+  // const [datestate, setDate] = useState('');
+  // const [amountstate, setAmount] = useState('');
+  // const [clientstate, setClient] = useState('');
+  // const [referencestate, setReference] = useState('');
+  const [editInvoice, setEditInvoice] = useState({});
 
   const checkAmount = () => {
-    let arrayTransaction = transactionState.map((record) => record.amount); //[]
+    let arrayTransaction = transactionState.map((record) => record.amount);
     let invoiceArray = invoiceState.forEach((invoice) => {
       if (arrayTransaction.includes(invoice.amount)) {
         invoice.status = 'PAID';
       }
     });
-    console.log('Here', invoiceArray);
   };
 
   const handleEdit = (id) => {
     let invoice = invoiceState.findIndex((element) => element.id === id);
     let obj = invoiceState[invoice];
-    console.log(obj);
-    setDate(obj.date);
-    setClient(obj.client);
-    setAmount(obj.amount);
-    setReference(obj.reference);
-    setCurrentInvoice(id);
+    setEditInvoice(obj);
   };
 
   const handleChange = (e) => {
     let { name, value } = e.target;
     console.log(name, value);
-    if (name === 'client') {
-      setClient(value);
-    }
-    let updatedRecords = invoiceState.map((invoice) => {
-      if (invoice.id === currentInvoice) {
-        invoice.client = clientstate;
+    setEditInvoice({ ...editInvoice, [name]: value });
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    let updatedRecords = invoiceState.map((invoice, index) => {
+      if (invoice.id === editInvoice.id) {
+        console.log('invoice', invoice);
+        invoice = editInvoice;
       }
       return invoice;
     });
-    console.log('Updated', updatedRecords);
+    console.log('Updated:', updatedRecords);
     setInvoiceState(updatedRecords);
   };
 
@@ -75,13 +73,13 @@ function Widget({ invoices, transaction }) {
         ))}
       </table>
       <div>
-        <form>
+        <form onSubmit={handleUpdate}>
           <div>
             <label>Date</label>
             <input
               type="text"
               name="date"
-              value={datestate}
+              value={editInvoice.date}
               onChange={handleChange}
             />
           </div>
@@ -90,7 +88,7 @@ function Widget({ invoices, transaction }) {
             <input
               type="text"
               name="client"
-              value={clientstate}
+              value={editInvoice.client}
               onChange={handleChange}
             />
           </div>
@@ -99,7 +97,7 @@ function Widget({ invoices, transaction }) {
             <input
               type="text"
               name="amount"
-              value={amountstate}
+              value={editInvoice.amount}
               onChange={handleChange}
             />
           </div>
@@ -108,9 +106,12 @@ function Widget({ invoices, transaction }) {
             <input
               type="text"
               name="reference"
-              value={referencestate}
+              value={editInvoice.reference}
               onChange={handleChange}
             />
+          </div>
+          <div>
+            <input type="submit" name="update" />
           </div>
         </form>
       </div>
